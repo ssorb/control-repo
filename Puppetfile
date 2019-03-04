@@ -47,6 +47,7 @@ mod 'puppetlabs-tomcat', '2.4.0'
 mod 'puppetlabs-transition', '0.1.1'
 mod 'puppetlabs-translate', '1.2.0'
 mod 'puppetlabs-vcsrepo', '1.5.0'
+mod 'puppetlabs-puppet_authorization', '0.5.0'
 
 
 
