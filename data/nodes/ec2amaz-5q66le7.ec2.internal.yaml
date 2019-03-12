@@ -1,4 +1,4 @@
 ---
-profile::app::cloud shop::webapp::db::dbpass: Azure$123
+profile::app::cloudshop::webapp::db::dbpass: 'Azure$123'
 
-profile::app::cloudshop::sqlserver::sql::sa_pass: Password$123$
+profile::app::cloudshop::sqlserver::sql::sa_pass: 'Password$123$'
