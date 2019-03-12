@@ -99,6 +99,7 @@ mod 'trlinkin-domain_membership', '1.1.2'
 mod 'tse-time', '1.0.1'
 mod 'tse-winntp', '1.0.1'
 mod 'yelp-uchiwa', '2.0.0'
+mod 'beersy-hiera_eyaml_setup', '0.1.2'
 
 mod 'tse-tse_facts',
   :git => 'https://github.com/puppetlabs/tse-module-tse_facts.git'
