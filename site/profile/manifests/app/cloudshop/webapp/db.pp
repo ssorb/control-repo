@@ -1,6 +1,6 @@
 class profile::app::cloudshop::webapp::db (
   $dbinstance    = 'MYINSTANCE',
-  $dbpass        = 'Azure$123',
+  $dbpass,        #= 'Azure$123',
   $dbuser        = 'CloudShop',
   $dbname        = 'AdventureWorks2012',
   $dbserver      = $::hostname, # $::fqdn doesn't work on Windows / AWS
