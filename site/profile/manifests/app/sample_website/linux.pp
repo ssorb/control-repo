@@ -3,6 +3,7 @@ class profile::app::sample_website::linux (
   Integer $webserver_port = 80,
   String $website_source_dir = 'puppet:///modules/profile/app/sample_website',
   Boolean $enable_monitoring = false,
+  String $h_file_content = lookup('profile::app::sample_website::linux'),
 ) {
 
   if $enable_monitoring {
@@ -64,10 +65,12 @@ class profile::app::sample_website::linux (
     ensure => present,
   }
     
- 
   file { "${doc_root}/extra.html":
     ensure  => file,
     content => "This is an extra file",
   }
- 
+  
+  file { "${doc_root}/h_file.html":
+    ensure  => file,
+    content => ${h_file_content},
 }
