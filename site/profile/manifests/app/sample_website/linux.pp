@@ -73,4 +73,5 @@ class profile::app::sample_website::linux (
   file { "${doc_root}/h_file.html":
     ensure  => file,
     content => "${h_file_content}",
+  }
 }
