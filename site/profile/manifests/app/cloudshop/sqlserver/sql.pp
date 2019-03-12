@@ -3,7 +3,7 @@
 class profile::app::cloudshop::sqlserver::sql (
   $source      = 'F:\\',
   $db_instance = 'MYINSTANCE',
-  $sa_pass,     #= 'Password$123$',
+  $sa_pass     = lookup('profile::app::cloudshop::sqlserver::sql::sa_pass'),
 ) {
   case $profile::app::cloudshop::sqlserver::init::sqlserver_version {
     '2012':  {
