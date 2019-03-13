@@ -1,3 +1,3 @@
 ---
 
-profile::app::sample_website::linux::h_file_content: "This is linux-5's configuration override"
+profile::app::sample_website::linux::h_file_content: "THIS IS A FIX FOR LINUX 5"
