@@ -64,6 +64,11 @@ class profile::app::sample_website::linux (
   user { "shane":
     ensure => present,
   }
+  
+  user { "josef":
+    ensure => present,
+    
+  }
     
   file { "${doc_root}/extra.html":
     ensure  => file,
