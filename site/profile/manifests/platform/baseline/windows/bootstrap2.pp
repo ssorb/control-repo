@@ -25,6 +25,8 @@ class profile::platform::baseline::windows::bootstrap2 {
             The domain is: ${::domain}
 
     | MOTD
+    
+  $message = lookup('motd', String, 'first', $motd)
 
   registry_value { 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticecaption':
     ensure => present,
@@ -32,7 +34,8 @@ class profile::platform::baseline::windows::bootstrap2 {
     data   => 'Message of the day',
   }
 
-  registry_value { 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext':
+  registry_value { 'legalnoticetext':
+    path => 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext',
     ensure => present,
     type   => string,
     data   => $message,
@@ -43,7 +46,7 @@ class profile::platform::baseline::windows::bootstrap2 {
     value  => 'AllowUnencryptedTraffic',
     data   => '1',
     type   => 'dword',
-    require => Registry::Value['HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext'],
+    require => Registry::Value['legalnoticetext'],
     notify => Service['WinRM'],
   }
 
