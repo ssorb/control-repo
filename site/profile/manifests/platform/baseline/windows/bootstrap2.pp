@@ -26,13 +26,13 @@ class profile::platform::baseline::windows::bootstrap2 {
 
     | MOTD
 
-  registry_value { '32:HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticecaption':
+  registry_value { 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticecaption':
     ensure => present,
     type   => string,
     data   => 'Message of the day',
   }
 
-  registry_value { '32:HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext':
+  registry_value { 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext':
     ensure => present,
     type   => string,
     data   => $message,
@@ -43,7 +43,7 @@ class profile::platform::baseline::windows::bootstrap2 {
     value  => 'AllowUnencryptedTraffic',
     data   => '1',
     type   => 'dword',
-    require => Registry::Value['32:HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext'],
+    require => Registry::Value['HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext'],
     notify => Service['WinRM'],
   }
 
