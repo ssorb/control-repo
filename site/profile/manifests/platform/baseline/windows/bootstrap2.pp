@@ -1,4 +1,4 @@
-class profile::platform::baseline::windows::bootstrap2 {
+class profile::platform::baseline::windows::bootstrap {
 
   require ::chocolatey
   Package {
