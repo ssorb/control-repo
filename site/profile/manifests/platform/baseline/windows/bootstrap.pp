@@ -91,13 +91,13 @@ class profile::platform::baseline::windows::bootstrap {
     require => Package['notepadplusplus'],
   }
 
-  package { 'git': 
-   require => Package['7zip'],
+  package { 'firefox': 
+    require => Package['7zip'],
   }
 
-  package { 'firefox': 
-    require => Package['git'],
-    notify  => Reboot['post_package_install'],
+  package { 'git': 
+   require => Package['firefox'],
+   notify  => Reboot['post_package_install'],
   }
 
   reboot { 'post_package_install': }
