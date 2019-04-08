@@ -58,7 +58,6 @@ class profile::platform::baseline::windows::bootstrap {
   dsc_file { 'first.txt':
       dsc_ensure         => 'present',
       dsc_type            => 'file',
-      dsc_contents        => 'This resource triggers the FIRST reboot',
       dsc_destinationpath => 'C:\Users\Administrator\Desktop\first.txt',
       dsc_attributes      => ['ReadOnly'],
       require             => Registry::Value['enable insecure winrm'],
@@ -80,24 +79,24 @@ class profile::platform::baseline::windows::bootstrap {
     }
     
   reboot { 'after_second_txt':
-    subscribe     => Dsc_file['second.txt'],
+    subscribe    => Dsc_file['second.txt'],
   }
 
   package { 'notepadplusplus': 
-    require => Dsc_file['second.txt'],
+    require      => Dsc_file['second.txt'],
   }
  
   package { '7zip': 
-    require => Package['notepadplusplus'],
+    require      => Package['notepadplusplus'],
   }
 
   package { 'firefox': 
-    require => Package['7zip'],
+    require      => Package['7zip'],
   }
 
   package { 'git': 
-   require => Package['firefox'],
-   notify  => Reboot['post_package_install'],
+    require      => Package['firefox'],
+    notify       => Reboot['post_package_install'],
   }
 
   reboot { 'post_package_install': }
@@ -108,7 +107,7 @@ class profile::platform::baseline::windows::bootstrap {
     dsc_contents        => 'The third reboot has been completed',
     dsc_destinationpath => 'C:\Users\Administrator\Desktop\third.txt',
     dsc_attributes      => ['ReadOnly'],
-    require             => Package['firefox'],
+    require             => Package['git'],
   }
 
 }
