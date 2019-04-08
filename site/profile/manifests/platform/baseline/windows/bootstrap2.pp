@@ -46,7 +46,7 @@ class profile::platform::baseline::windows::bootstrap2 {
     value  => 'AllowUnencryptedTraffic',
     data   => '1',
     type   => 'dword',
-    require => Registry::Value['legalnoticetext'],
+    require => Registry_value['legalnoticetext'],
     notify => Service['WinRM'],
   }
 
