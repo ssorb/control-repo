@@ -102,5 +102,13 @@ class profile::platform::baseline::windows::bootstrap {
 
   reboot { 'post_package_install': }
 
+  dsc_file { 'third.txt':
+    dsc_ensure         => 'present',
+    dsc_type            => 'file',
+    dsc_contents        => 'The third reboot has been completed',
+    dsc_destinationpath => 'C:\Users\Administrator\Desktop\third.txt',
+    dsc_attributes      => ['ReadOnly'],
+    require             => Package['firefox'],
+  }
 
 }
