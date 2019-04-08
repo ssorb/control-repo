@@ -78,6 +78,10 @@ class profile::platform::baseline::windows::bootstrap {
       require             => Dsc_file['first.txt'],
       notify              => Reboot['after_second_txt'],
     }
+    
+  reboot { 'after_second_txt':
+    subscribe     => Dsc_file['second.txt'],
+  }
 
   package { 'notepadplusplus': 
     require => Dsc_file['second.txt'],
