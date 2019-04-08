@@ -1,7 +1,6 @@
 class profile::platform::baseline::windows::bootstrap {
 
   require ::chocolatey
-  require profile::platform::baseline::windows::join_domain
   
   Package {
       ensure   => installed,
