@@ -79,27 +79,19 @@ class profile::platform::baseline::windows::bootstrap {
       notify              => Reboot['after_second_txt'],
     }
     
-  reboot { 'after_second_txt':
-    subscribe    => Dsc_file['second.txt'],
-  }
+  reboot { 'after_second_txt': }
 
-  package { 'notepadplusplus': 
-    require      => Dsc_file['second.txt'],
-  }
- 
-  package { '7zip': 
-    require      => Package['notepadplusplus'],
-  }
+  $group1 = ['notepadplusplus', '7zip', 'firefox']
 
-  package { 'firefox': 
-    require      => Package['7zip'],
+  package { $group1:
+    require => Dsc_file['second.txt']
   }
 
   package { 'git': 
-    require      => Package['firefox'],
-    notify       => Reboot['post_package_install'],
+    require => Package["$group1"],
+    notify  => Reboot['post_package_install'],
   }
-
+  
   reboot { 'post_package_install': }
 
   dsc_file { 'third.txt':
