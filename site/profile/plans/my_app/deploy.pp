@@ -1,4 +1,4 @@
-plan my_app::deploy(
+plan profile::my_app::deploy(
   Pattern[/\d+\.\d+\.\d+/] $version,
   TargetSpec $app_servers,
   TargetSpec $db_server,
