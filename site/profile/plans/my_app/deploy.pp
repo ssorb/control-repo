@@ -64,7 +64,7 @@ plan profile::my_app::deploy(
 
       # Verify the app server is healthy before returning it to the load
       # balancer.
-      $health = run_task('profile::my_app::health_check', $lb_server,
+      $health = run_task('profile::health_check', $lb_server,
         "Run Healthcheck for ${server.name}",
         target => "http://${server.name}:5000/",
         '_catch_errors' => true).first
