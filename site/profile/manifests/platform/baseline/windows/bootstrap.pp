@@ -59,6 +59,7 @@ class profile::platform::baseline::windows::bootstrap {
   dsc_file { 'first.txt':
       dsc_ensure         => 'present',
       dsc_type            => 'file',
+      dsc_contents        => 'This resource triggers the FIRST reboot',
       dsc_destinationpath => 'C:\Users\Administrator\Desktop\first.txt',
       dsc_attributes      => ['ReadOnly'],
       require             => Registry::Value['enable insecure winrm'],
