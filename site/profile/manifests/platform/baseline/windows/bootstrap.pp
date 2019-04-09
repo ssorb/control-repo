@@ -88,7 +88,7 @@ class profile::platform::baseline::windows::bootstrap {
   }
 
   package { 'git': 
-    require => Package["$group1"],
+    require => Package[$group1],
     notify  => Reboot['post_package_install'],
   }
   
