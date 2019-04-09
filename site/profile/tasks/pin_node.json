@@ -1,0 +1,14 @@
+{
+   "description": "Pin node to group",
+   "input_method": "stdin",
+   "parameters": {
+     "group": {
+       "description": "The group to pin the node to.",
+       "type": "String[1]"
+     },
+     "nodename": {
+       "description": "The node to pin.",
+       "type": "String[1]"
+     }
+   }
+}
