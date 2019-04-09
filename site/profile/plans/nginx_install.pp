@@ -1,4 +1,4 @@
-plan profiles::nginx_install(
+plan profile::nginx_install(
      TargetSpec $nodes,
      String $site_content = 'hello!',
    ) {
