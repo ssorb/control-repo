@@ -78,7 +78,7 @@ plan profile::my_app::deploy(
         }
       }
 
-      run_task('profile::my_app::lb', $lb_server,
+      run_task('profile::lb', $lb_server,
         action => 'add',
         backend => $instance,
         server => $server.name,
@@ -88,7 +88,7 @@ plan profile::my_app::deploy(
     }
   }
 
-  run_task('profile::my_app::uninstall', [$db_server, $app_servers],
+  run_task('profile::uninstall', [$db_server, $app_servers],
     "Clean up old versions",
     live_versions => $old_versions + $version,
   )
