@@ -9,6 +9,6 @@ class profile::puppet::seteam_master {
   include ::profile::puppet::master::fileserver
   include ::profile::puppet::master::firewall
   include ::profile::puppet::master::hiera
-  include ::profile::puppet::master::node_manager
+  #include ::profile::puppet::master::node_manager
 
 }
