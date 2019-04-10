@@ -7,7 +7,7 @@ define profile::app::cloudshop::sqlserver::attachdb (
   $zip_file      = 'AdventureWorks2012_Data.zip',
   $dbinstance    = 'MYINSTANCE',
   $owner         = 'CloudShop',
-  $dbpass        = lookup('profile::app::cloudshop::webapp::db::dbpass'),
+  $dbpass        = 'Azure$123',
 ) {
   case $::profile::app::cloudshop::sqlserver::init::sqlserver_version {
     '2012':  {
