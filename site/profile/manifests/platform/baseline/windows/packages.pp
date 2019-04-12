@@ -11,11 +11,11 @@ class profile::platform::baseline::windows::packages {
   package { 'uniextract': }
   package { 'firefox': }
 
-  reboot {'post_install_reboot':
-    subscribe => Package['firefox'],
-    apply     => 'immediately',
-    timeout   => 0,
-  }
+#  reboot {'post_install_reboot':
+#    subscribe => Package['firefox'],
+#    apply     => 'immediately',
+#    timeout   => 0,
+#  }
 
 
 }
