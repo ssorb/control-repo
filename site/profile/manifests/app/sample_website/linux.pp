@@ -3,7 +3,7 @@ class profile::app::sample_website::linux (
   Integer $webserver_port = 80,
   String $website_source_dir = 'puppet:///modules/profile/app/sample_website',
   Boolean $enable_monitoring = false,
-  String $h_file_content = lookup('profile::app::sample_website::linux'),
+  String $h_file_content = lookup('profile::app::sample_website::linux::h_file_content'),
 ) {
 
   if $enable_monitoring {
