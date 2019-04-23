@@ -13,7 +13,7 @@ plan profile::my_app::deploy(
 
   # First query the load balancer and make sure the app isn't under too much load to do a deploy.
   unless $force {
-    $conns = run_task('profile::lb', "pcp://$lb_server",
+    $conns = run_task('profile::lb', $lb_server,
        "Check load before starting deploy",
        action => 'stats',
        backend => $instance,
