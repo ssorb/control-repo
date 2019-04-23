@@ -13,7 +13,7 @@ plan profile::my_app::deploy(
 
   # First query the load balancer and make sure the app isn't under too much load to do a deploy.
   unless $force {
-    $conns = run_task('profile::lb', $lb_server,
+    $conns = run_task('profile::lb', "pcp://$lb_server",
        "Check load before starting deploy",
        action => 'stats',
        backend => $instance,
@@ -29,12 +29,12 @@ plan profile::my_app::deploy(
 
   # Install the new version of the application and check what version was previously
   # installed so it can be deleted after the deploy.
-  $old_versions = run_task('profile::install', [$app_servers, $db_server],
+  $old_versions = run_task('profile::install', ["pcp://$app_servers", "pcp://$db_server"],
     "Install ${version} of the application",
     version => $version
   ).map |$r| { $r['previous_version'] }
 
-  run_task('profile::migrate', $db_server)
+  run_task('profile::migrate', "pcp://$db_server")
 
   # Don't log every action on each node, only log important messages
   without_default_logging() || {
@@ -42,7 +42,7 @@ plan profile::my_app::deploy(
     get_targets($app_servers).each |$server| {
 
       # Check stats and print a message to the user
-      $stats = run_task('profile::lb', $lb_server,
+      $stats = run_task('profile::lb', "pcp://$lb_server",
         action => 'stats',
         backend => $instance,
         server => $server.name,
@@ -50,7 +50,7 @@ plan profile::my_app::deploy(
       ).first
       notice("Deploying to ${server.name}, currently ${stats["status"]} with ${stats["connections"]} open connections.")
 
-      run_task('profile::lb', $lb_server,
+      run_task('profile::lb', "pcp://$lb_server",
         "Drain connections from ${server.name}",
         action => 'drain',
         backend => $instance,
@@ -64,7 +64,7 @@ plan profile::my_app::deploy(
 
       # Verify the app server is healthy before returning it to the load
       # balancer.
-      $health = run_task('profile::health_check', $lb_server,
+      $health = run_task('profile::health_check', "pcp://$lb_server",
         "Run Healthcheck for ${server.name}",
         target => "http://${server.name}:5000/",
         '_catch_errors' => true).first
@@ -78,7 +78,7 @@ plan profile::my_app::deploy(
         }
       }
 
-      run_task('profile::lb', $lb_server,
+      run_task('profile::lb', "pcp://$lb_server",
         action => 'add',
         backend => $instance,
         server => $server.name,
@@ -88,7 +88,7 @@ plan profile::my_app::deploy(
     }
   }
 
-  run_task('profile::uninstall', [$db_server, $app_servers],
+  run_task('profile::uninstall', ["pcp://$db_server", "pcp://$app_servers"],
     "Clean up old versions",
     live_versions => $old_versions + $version,
   )
