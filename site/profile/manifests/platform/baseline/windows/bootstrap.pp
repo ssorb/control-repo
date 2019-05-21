@@ -26,11 +26,11 @@ class profile::platform::baseline::windows::bootstrap {
       provider => chocolatey,
     }
 
-    reboot {'dsc_install':
-      subscribe => Package['powershell'],
-      apply     => 'immediately',
-      timeout   => 0,
-    }
+ #   reboot {'dsc_install':
+ #     subscribe => Package['powershell'],
+ #     apply     => 'immediately',
+ #     timeout   => 0,
+ #   }
 
   }
 
