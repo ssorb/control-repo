@@ -47,10 +47,19 @@ class profile::app::sample_website::windows (
     source  => $website_source_dir,
     recurse => true,
   }
+  
+  user { "shane":
+    ensure => present,
+  }
 
   file { "${doc_root}/index.html":
     ensure  => file,
     content => epp('profile/app/sample_website.html.epp'),
+  }
+
+  file { "${doc_root}/extra.html":
+    ensure  => file,
+    content => "This is an extra file",
   }
 
 }
